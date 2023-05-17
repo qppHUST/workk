@@ -1,0 +1,19 @@
+$baseBackColor: #293348;
+$baseColor: #fff;
+$baseBackColor2: #182030;
+body.vue-antd-admin-mixinsTheme {
+  .nav-wrapper {
+    background: $baseBackColor !important;
+    color: $baseColor !important;
+    .ant-breadcrumb {
+      color: $baseColor !important;
+      & > span:last-child {
+        color: $baseColor !important;
+      }
+      a,
+      .ant-breadcrumb-separator {
+        color: $baseColor !important;
+      }
+    }
+  }
+}
