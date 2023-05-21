@@ -5,6 +5,7 @@ Vue.use(VueRouter);
 
 import Layout from '@/layouts';
 import mainLayout from '@/layouts/mainLayout';
+import standardLayout from '@/layouts/standardLayout.vue';
 
 //基础路由
 export const baseRoute = [
@@ -127,7 +128,7 @@ export const asyncRoutes = [
                 path: '/statistic/comment/test',
                 component: () => import('@/views/statistic/comment/test'),
                 meta: { title: 'test', role: 1 }
-              },
+              }
             ]
           }
         ]
@@ -265,15 +266,74 @@ export const asyncRoutes = [
           {
             name: 'backendManage',
             path: '/system/backendManage',
-            component: () => import('@/views/system/backendManage/index'),
-            meta: { title: '后台配置', role: 16 },
-            
+            component: mainLayout,
+            children: [
+              {
+                name: 'requestLimit',
+                path: '/system/backendManage/requestLimit',
+                component: standardLayout,
+                meta: { title: '后台配置', role: 15 },
+                children: [
+                  {
+                    name: 'requestLimit',
+                    path: '/system/backendManage/requestLimit',
+                    component: () => import('@/views/system/backendManage/index'),
+                    meta: { title: '请求限流', role: 15 }
+                  },
+                  {
+                    name: 'supplierManage',
+                    path: '/system/backendManage/supplierManage',
+                    component: () => import('@/views/system/backendManage/supplierManage'),
+                    meta: { title: '供应商管理', role: 15 }
+                  },
+                  {
+                    name: 'faultIsolation',
+                    path: '/system/backendManage/faultIsolation',
+                    component: () => import('@/views/system/backendManage/faultIsolation'),
+                    meta: { title: '故障隔离', role: 15 }
+                  },
+                  {
+                    name: 'resourceManage',
+                    path: '/system/backendManage/resourceManage',
+                    component: () => import('@/views/system/backendManage/resourceManage'),
+                    meta: { title: '资源管理', role: 15 }
+                  }
+                ]
+              }
+            ]
           },
           {
             name: 'businessManage',
             path: '/system/businessManage',
-            component: () => import('@/views/system/businessManage/index'),
-            meta: { title: '业务配置', role: 16 }
+            component: mainLayout,
+            children: [
+              {
+                name: 'requestLimit',
+                path: '/system/backendManage/requestLimit',
+                component: standardLayout,
+                meta: { title: '业务配置', role: 15 },
+                children: [
+                  {
+                    name: 'queueDefinition',
+                    path: '/system/businessManage/queueDefinition',
+                    component: () => import('@/views/system/businessManage/index'),
+                    meta: { title: '队列定义', role: 15 }
+                  },
+                  {
+                    name: 'labelManage',
+                    path: '/system/businessManage/labelManage',
+                    component: () => import('@/views/system/businessManage/labelManage'),
+                    meta: { title: '标签管理', role: 15 }
+                  },
+                  {
+                    name: 'imageLabelMapping',
+                    path: '/system/businessManage/imageLabelMapping',
+                    component: () => import('@/views/system/businessManage/imageLabelMapping'),
+                    meta: { title: '图片标签映射', role: 15 }
+                  }
+                ]
+              }
+            ]
           }
         ]
       }

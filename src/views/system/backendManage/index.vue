@@ -14,7 +14,7 @@
         <div slot="action" slot-scope="{ text }">
           <a-button type="primary" size="small" @click="handleEdit(text)"> 查看 </a-button>
           <a-popconfirm
-            title="你确定要删除当前列吗?"
+            title="你确定要禁用当前用户嘛?"
             ok-text="是"
             cancel-text="否"
             :disabled="text.role && text.role == 'admin'"
@@ -25,10 +25,14 @@
             </a-button>
           </a-popconfirm>
         </div>
+        <div slot="operator" slot-scope="{ text }">
+          <span>{{ text.operator }}</span>
+          <img style="width: 30px; margin-left: 5px" src="@/assets/img/avator.png" />
+        </div>
       </standard-table>
     </a-card>
     <a-card v-else>
-      <edit-form />
+      <edit-form @cancel="cancel" />
     </a-card>
   </div>
 </template>
@@ -68,7 +72,7 @@ const tableHead = [
   },
   {
     title: '操作人',
-    dataIndex: 'operator',
+    scopedSlots: { customRender: 'operator' },
     ellipsis: true
   },
   {
@@ -107,6 +111,9 @@ export default {
 
   methods: {
     //新增
+    cancel() {
+      this.isEdit = false;
+    },
     handleAdd() {
       this.currentRow = null;
       this.dialogVisible = true;

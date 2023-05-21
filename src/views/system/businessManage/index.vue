@@ -13,13 +13,15 @@
         :pagination="pagination"
         @changeCurrent="handleChange"
       >
-      <!-- todo:两个slot  -->
-        <div slot="operator"></div>
-        <div slot="status"></div>
+        <!-- todo:两个slot  -->
+        <div slot="operator" slot-scope="{ text }">
+          <span>{{ text.userid }}</span>
+          <img src="@/assets/img/avator.png" style="width: 30px; margin-left: 5px" />
+        </div>
         <div slot="action" slot-scope="{ text }">
           <a-button type="primary" size="small" @click="handleEdit(text)"> 查看 </a-button>
           <a-popconfirm
-            title="你确定要删除当前列吗?"
+            title="你确定要禁用当前用户嘛?"
             ok-text="是"
             cancel-text="否"
             :disabled="text.role && text.role == 'admin'"
@@ -41,7 +43,6 @@
 <script>
 import standardTable from '@/components/standardTable/index';
 import editForm from './/components/editForm.vue';
-import { getTasks } from '@/api/task.js';
 const tableHead = [
   {
     title: '队列名称',
@@ -59,7 +60,7 @@ const tableHead = [
   },
   {
     title: '操作人',
-    dataIndex: 'userid',
+    scopedSlots: { customRender: 'operator' },
     ellipsis: true
   },
   {
@@ -98,6 +99,9 @@ export default {
     };
   },
   methods: {
+    handleDelete(text) {
+      console.log(text);
+    },
     getData() {
       // getTasks({ pagenum: 0, pagesize: 10 })
       //   .then(resp => {

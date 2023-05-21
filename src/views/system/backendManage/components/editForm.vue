@@ -18,7 +18,7 @@
       </a-form-item>
       <a-form-item>
         <div style="float: right; margin-right: 300px">
-          <a-button type="primary" style="margin-right: 10px">
+          <a-button type="primary" style="margin-right: 10px" @click="cancel">
             <!-- <template #icon><img src="@/icons/svg/return.svg" /></template> -->
             取消
           </a-button>
@@ -42,6 +42,11 @@ export default {
         status: 'ded'
       }
     };
+  },
+  methods: {
+    cancel() {
+      this.$emit('cancel', '');
+    }
   }
 };
 </script>
