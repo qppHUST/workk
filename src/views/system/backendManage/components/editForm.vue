@@ -32,14 +32,15 @@
 <script>
 export default {
   components: {},
+  props: ['data'],
   data() {
     return {
       formState: {
-        businessId: 'AAA',
-        from: 'BBB',
-        limit: 'Ccc',
-        requestLimit: 'dddd',
-        status: 'ded'
+        businessId: '',
+        from: '',
+        limit: '',
+        requestLimit: '',
+        status: ''
       }
     };
   },
@@ -47,6 +48,10 @@ export default {
     cancel() {
       this.$emit('cancel', '');
     }
+  },
+  created() {
+    this.formState = this.data;
+    console.log(this.formState);
   }
 };
 </script>

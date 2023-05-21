@@ -293,10 +293,10 @@ export const asyncRoutes = [
                     meta: { title: '故障隔离', role: 15 }
                   },
                   {
-                    name: 'resourceManage',
-                    path: '/system/backendManage/resourceManage',
-                    component: () => import('@/views/system/backendManage/resourceManage'),
-                    meta: { title: '资源管理', role: 15 }
+                    name: 'formatParsingManagement',
+                    path: '/system/backendManage/formatParsingManagement',
+                    component: () => import('@/views/system/backendManage/formatParsingManagement'),
+                    meta: { title: '格式解析管理', role: 15 }
                   }
                 ]
               }
@@ -308,8 +308,8 @@ export const asyncRoutes = [
             component: mainLayout,
             children: [
               {
-                name: 'requestLimit',
-                path: '/system/backendManage/requestLimit',
+                name: 'queueDefinition',
+                path: '/system/businessManage/queueDefinition',
                 component: standardLayout,
                 meta: { title: '业务配置', role: 15 },
                 children: [

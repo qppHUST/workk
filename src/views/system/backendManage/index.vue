@@ -6,11 +6,10 @@
         <a-input v-model="value" style="width: 200px; margin-right: 5px" />
         <a-button type="primary" icon="search" class="select-bottom" @click="handleAdd"> 搜索 </a-button>
       </div>
-      <standard-table :tableData="tableData" :tableHead="tableHead" :loading="loading" :pagination="false">
+      <standard-table :tableData="tableData" :tableHead="tableHead" :loading="loading" :pagination="pagination">
         <div slot="index" slot-scope="{ index }">
           {{ index + 1 }}
         </div>
-
         <div slot="action" slot-scope="{ text }">
           <a-button type="primary" size="small" @click="handleEdit(text)"> 查看 </a-button>
           <a-popconfirm
@@ -32,7 +31,7 @@
       </standard-table>
     </a-card>
     <a-card v-else>
-      <edit-form @cancel="cancel" />
+      <edit-form @cancel="cancel" :data="currentRow" />
     </a-card>
   </div>
 </template>
@@ -97,7 +96,12 @@ export default {
       tableData: [],
       currentRow: null,
       dialogVisible: false,
-      tableHead
+      tableHead,
+      pagination: {
+        current: 0,
+        pageSize: 6,
+        total: 2
+      }
     };
   },
   created() {
@@ -128,7 +132,8 @@ export default {
           requestLimit: '50-S',
           updateTime: '2023-05-15 17:58:06',
           operator: 'ppq',
-          status: 'on'
+          status: 'on',
+          id: '1'
         },
         {
           index: '2',
@@ -138,7 +143,8 @@ export default {
           requestLimit: '50-S',
           updateTime: '2023-05-15 17:58:06',
           operator: 'ppq',
-          status: 'on'
+          status: 'on',
+          id: '2'
         }
       ];
     },
