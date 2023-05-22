@@ -22,7 +22,7 @@
             <!-- <template #icon><img src="@/icons/svg/return.svg" /></template> -->
             取消
           </a-button>
-          <a-button type="primary">提交</a-button>
+          <a-button type="primary" @click="submit">提交</a-button>
         </div>
       </a-form-item>
     </a-form>
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import { updateTask } from '@/api/task.js';
 export default {
   components: {},
   props: ['data'],
@@ -47,6 +48,9 @@ export default {
   methods: {
     cancel() {
       this.$emit('cancel', '');
+    },
+    submit() {
+      updateTask(this.formState);
     }
   },
   created() {
